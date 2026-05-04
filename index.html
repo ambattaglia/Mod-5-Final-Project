@@ -5,34 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <script src="index.js"></script>
 </head>
 
 <body>
+
     <section id="landing">
+
+       
         <nav>
             <div class="row nav__row">
                 <div class="nav__logo">
-                    <img class="nav__logo--img" src="./Assets/headphones.jpg" alt="logo"> <!-- Corrected image tag -->
+                    <img class="nav__logo--img" src="./Assets/vecteezy_musical-head-phone-with-abstract-pulse-inside_.jpg" alt="logo">
                     <div class="nav__logo--title">Music To Your Ears</div>
                 </div>
-                <div class="nav__links">
-                    <a href="#" class="nav__link">About</a>
-                    <a href="#" class="nav__link">Pricing</a>
-                    <a href="#" class="nav__link">Playlist</a>
-                    <a href="#" class="nav__link nav__link--primary">Sign Up</a>
-                </div>
+
+                <ul class="nav__link--list">
+                    <li class="nav__link"><a href="#" class="nav__link--anchor link__hover-effect">Pricing</a></li>
+                    <li class="nav__link"><a href="#" class="nav__link--anchor link__hover-effect">Playlist</a></li>
+                    <li class="nav__link"><a href="#" class="nav__link--anchor link__hover-effect">Sign Up</a></li>
+                </ul>
             </div>
         </nav>
-                <div class="banner">
-                    <img src="./Assets/banner.jpg" alt="Banner Image" class="banner__image">
-                </div>
-                   
-              
-            </div>
+
         
+        <section class="banner">
+            <img src="./Assets/banner.jpg" alt="Banner Image" class="banner__image">
+        </section>
+
+        
+        <div class="container">
+            <div class="row">
+                <div class="header__description">
+
+                    <h1>Life is better when <span class="purple">MUSIC</span> is part of it!</h1>
+
+                    <div class="header__row">
+                        <p class="header__para">
+                            Discover <i><span class="purple fade-in">unlimited</span></i> music from your favorite artists.
+                        </p>
+
+                        <div class="input__wrapper">
+                            <input type="text" placeholder="Search by Title, Artist or Genre">
+                            <button class="search__btn">Search</button>
+                        </div>
+                    </div>
+
+                    <div id="loading" class="loading hidden"></div>
+                    <div id="results"></div>
+
+            <div class="song">
+                <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                        <img src="path/to/image.jpg" alt="Album Cover">
+                    </div>
+            <div class="flip-card-back">
+       
         </div>
-        
-    </section>
+    </div>
+</div>
+
+                    
+                </div> 
+            </div> 
+        </div> 
+
+    </section> 
+
+    <script src="index.js"></script>
 </body>
 </html>

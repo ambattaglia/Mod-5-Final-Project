@@ -51,13 +51,15 @@ function showDefaultFleetwoodMac() {
 
     customImages.forEach((img, index) => {
         results.innerHTML += `
-            <div class="song">
+            <div class="song flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
                         <img src="${img}" alt="Song Image">
                         <h3>${defaultTitles[index]}</h3>
                     </div>
                     <div class="flip-card-back">
+                        <i class="fa-solid fa-qrcode"></i>
+                        <p style="font-weight: bold; margin-bottom: -10px;">Scan for soundtrack</p>
                         <p>${defaultLabels[index]}</p>
                     </div>
                 </div>
@@ -125,13 +127,15 @@ function displaySongs(songs) {
         const img = customImages[index];
 
         results.innerHTML += `
-            <div class="song">
+            <div class="song flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
                         <img src="${img}" alt="Song Image">
                         <h3>${title}</h3>
                     </div>
                     <div class="flip-card-back">
+                        <i class="fa-solid fa-qrcode"></i>
+                        <p style="font-weight: bold; margin-bottom: -10px;">Scan for soundtrack</p>
                         <p>${defaultLabels[index]}</p>
                     </div>
                 </div>

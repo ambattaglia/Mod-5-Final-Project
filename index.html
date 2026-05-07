@@ -18,7 +18,7 @@
             <div class="row nav__row">
                 <div class="nav__logo">
                     <img class="nav__logo--img" src="./Assets/vecteezy_musical-head-phone-with-abstract-pulse-inside_.jpg" alt="logo">
-                    <div class="nav__logo--title">Music To Your Ears</div>
+                    <div class="nav__logo--title">Vibe Frequency</div>
                 </div>
 
                 <ul class="nav__link--list">
@@ -35,25 +35,47 @@
         </section>
 
         
-        <div class="container">
-            <div class="row">
-                <div class="header__description">
+ <div class="container">
+    <div class="row">
+        <div class="header__description">
 
-                    <h1>Life is better when <span class="purple">MUSIC</span> is part of it!</h1>
+            <div class="header__row">
+                <p class="header__para">
+                    Discover <i><span class="purple fade-in">unlimited</span></i> music from your favorite artists.
+                </p>
 
-                    <div class="header__row">
-                        <p class="header__para">
-                            Discover <i><span class="purple fade-in">unlimited</span></i> music from your favorite artists.
-                        </p>
+                <div class="input__wrapper">
+                    <input type="text" placeholder="Search by Title, Artist or Genre">
+                    <button class="search__btn">Search</button>
+                </div>
+            </div>
 
-                        <div class="input__wrapper">
-                            <input type="text" placeholder="Search by Title, Artist or Genre">
-                            <button class="search__btn">Search</button>
-                        </div>
-                    </div>
+            <div id="loading" class="loading hidden"></div>
 
-                    <div id="loading" class="loading hidden"></div>
-                    <div id="results"></div>
+            <div class="slider__container">
+                <label for="yearSlider" class="slider__label">
+                    Year album was released: <span id="yearValue" class="purple"></span>
+                </label>
+
+                <input type="range" id="yearSlider" class="custom-slider"
+                       min="1969" max="1998" value="2000" step="1">
+
+               <div class="slider__ticks">
+        <span>1960</span>
+        <span>1970</span>
+        <span>1980</span>
+        <span>1990</span>
+        <span>2000</span>
+</div>
+
+            </div>
+
+        </div> 
+    </div>
+</div>
+
+<!-- ✅ RESULTS SHOULD BE OUTSIDE THE HEADER -->
+<div id="results"></div>
 
 
                     
@@ -62,6 +84,48 @@
         </div> 
 
     </section> 
+
+        <footer>
+<div class="footer">
+   
+
+        <div class="footer__bottom">
+
+            <!-- LEFT SIDE -->
+            <div class="footer__left">
+                <div class="footer__logo">
+                    <img src="./Assets/vecteezy_musical-head-phone-with-abstract-pulse-inside_.jpg" 
+                         class="footer__logo--img" 
+                         alt="Footer Logo">
+                </div>
+                <div class="footer__logo--text">Vibe Frequency</div>
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="footer__logo--saying">
+    Life is better when&nbsp;<span class="purple script">MUSIC</span> is part of it!
+
+</div>
+
+
+        </div>
+
+        <div class="footer__copyright">
+            © 2023 Vibe Frequency All Rights Reserved.
+        </div>
+
+    </div>
+</div>
+
+    </footer>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="index.js"></script>
 </body>

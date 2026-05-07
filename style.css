@@ -12,15 +12,20 @@
     min-height: 100vh;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+
 
 .row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    max-width: 1200px;
+    max-width: 2000px;
     margin: 0 auto;
-    padding: 0 12px;
+    padding: 10 12px;
 }
 
 .container {
@@ -35,9 +40,21 @@
   
 }
 
-.purple {
-    color: rgb(195, 0, 255)
+.purple.script {
+    color: #7a3cff;
+    font-family: 'Permanent Marker', cursive;
+    letter-spacing: 4px;
 }
+
+.purple.fade-in {
+    font-weight: 700; 
+}
+
+.purple {
+    color: #7a3cff;
+}
+
+
 
 a {
   text-decoration: none;
@@ -76,23 +93,26 @@ nav {
 .nav__logo--title {
     display: flex;
     font-weight: 500;
-    font-size: 30px;
+    font-size: 38px;
     padding-bottom: 2px;
     letter-spacing: 0.6px;
+    font-family: 'Permanent Marker', cursive;
 }
 
 .nav__link--list {
     display: flex;
-    gap: 38px; 
+    gap: 70px; 
     list-style: none;
     align-items: center;
-    font-size: 26px;
+    font-size: 28px;
 }
 
 
 .nav__link--anchor {
     color: black; 
     text-decoration: none;
+    font-family: 'Permanent Marker', cursive;
+    
 }
 
 .link__hover-effect {
@@ -126,6 +146,8 @@ nav {
     height: 350px; 
     overflow: hidden; 
     position: relative; 
+    margin-top: 50px;
+    background-color: black
 }
 
 .banner__image {
@@ -139,26 +161,19 @@ nav {
     top: 0;
     left: 0;
     transform: none;
-    padding: 40px 30px;
     max-width: 1000px;
     margin: 0 auto;
     display: flex;              
     flex-direction: column;     
     align-items: center;      
     justify-content: center;    
-    font-size: 20px;
+    font-size: 30px;
 }
-
-.header__description h1 {
-    font-family: 'Permanent Marker', cursive;
-    text-align: center;
-}
-
 
 .header__para {
-    margin: 0;
-    padding: 40px 10px;
-    font-size: 35px;
+    margin: 40px;
+    padding: 30px 20px;
+    font-size: 38px;
 }
 
 /* SEARCH */
@@ -166,7 +181,7 @@ nav {
 .input__wrapper {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
     width: 100%;
     height: 50px;
 }
@@ -196,11 +211,13 @@ nav {
     border-radius: 25px;
     cursor: pointer;
     font-size: 26px;
-    transition: all .25s ease;
+    transition: transform .25s ease, box-shadow .25s ease;
 }
 
 .search__btn:hover {
-    background-color: #333;
+
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.2);
 }
 
 .fade-in {
@@ -218,6 +235,91 @@ nav {
         transform: translateY(0);
     }
 }
+
+/* --- SLIDER STYLES --- */
+
+
+.slider__container {
+    margin-top: 110px; 
+    width: 100%;
+    max-width: 480px; 
+    padding: 12px 18px; 
+    background: #ffffff;
+    border-radius: 12px;
+    border: 2px solid #e0d4f5;
+    border-bottom: 6px solid #7a3cff; 
+    border-right: 4px solid #7a3cff; 
+    box-shadow: 4px 8px 15px rgba(0, 0, 0, 0.1); 
+}
+
+.slider__label {
+    font-size: 20px; 
+    font-weight: 500;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 5px; 
+    color: #333;
+}
+
+
+.custom-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px; 
+    background: #e6d9fc; 
+    border-radius: 10px;
+    outline: none;
+    margin: 8px 0; 
+    box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.2), inset 0px -1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.custom-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #7a3cff;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(122, 60, 255, 0.5); /* Purple glow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.custom-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 16px rgba(122, 60, 255, 0.7);
+}
+
+
+.custom-slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 50%;
+    background: #7a3cff;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(122, 60, 255, 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.custom-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 16px rgba(122, 60, 255, 0.7);
+}
+
+
+.slider__ticks {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    color: #999;
+    font-weight: 500;
+    padding: 0 10px;
+    margin-top: 10px;
+}
+
 
 
 .loading {
@@ -257,24 +359,13 @@ nav {
 }
 
 #results {
-    width: 100%; 
-    height: auto; 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    margin-top: 30px;
-    padding: 10px;
+    gap: 80px;
+    max-width: 1000px;
+    margin: 40px auto 0;
     justify-items: center;
-    align-items: center;
 }
-
-.song {
-    display: flex; /* or use display: grid; */
-    flex-direction: column; /* for flexbox */
-    /* Set additional properties as needed */
-}
-
-
 
 
 .song:hover {
@@ -297,7 +388,7 @@ nav {
 }
 
 .song p {
-    font-size: 14px;
+    font-size: 18px;
     color: #666;
 }
 
@@ -349,7 +440,7 @@ nav {
     position: relative;
     width: 100%;
     height: 100%;
-    transition: transform 0.6s ease;
+    transition: transform 1s ease;
     transform-style: preserve-3d;
 }
 
@@ -401,7 +492,66 @@ nav {
 }
 
 
+/* FOOTER */
 
+.footer {
+    max-width: 1700px;         
+    margin: 0 auto;            
+    padding: 100px; 
+    
+}
+
+.footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.footer__copyright {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+
+.footer__logo {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.footer__logo--img {
+     height: 140px; 
+    width: 160px;
+}
+
+
+
+.footer__left {
+    display: flex;
+    align-items: center;
+    gap: 12px
+    
+}
+
+
+.footer__logo--text {
+    display: flex;
+    font-weight: 500;
+    font-size: 32px;
+    
+    letter-spacing: 1px;
+    font-family: 'Permanent Marker', cursive;
+    
+}
+
+.footer__logo--saying {
+    display: flex;
+    font-weight: 500;
+    font-size: 32px;
+    letter-spacing: 0.6px;
+    font-family: 'Permanent Marker', cursive;
+}
 
 
 

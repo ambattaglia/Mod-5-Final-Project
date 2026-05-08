@@ -2,34 +2,38 @@ document.addEventListener("DOMContentLoaded", () => {
     const input = document.querySelector("input");
     const btn = document.querySelector(".search__btn");
     
-    // Grab the slider and the text element that displays the year
     const yearSlider = document.getElementById("yearSlider");
     const yearValue = document.getElementById("yearValue");
 
-    // Listen for when the slider is moved and update the text
+    
+    const initialYear = parseInt(yearSlider.value);
+    yearValue.textContent = initialYear;
+    filterAndRenderAlbums(initialYear);
+
+    
     yearSlider.addEventListener("input", (e) => {
-        yearValue.textContent = e.target.value;
+        const selectedYear = parseInt(e.target.value);
+        yearValue.textContent = selectedYear;
         
-        // If you want to filter your results based on the year later, 
-        // you would call a filter function right here!
+        
+        filterAndRenderAlbums(selectedYear);
     });
 
+    
     btn.addEventListener("click", () => {
         const query = input.value.trim();
-        searchSongs(query);
+        if(query !== "") searchSongs(query);
     });
 
+    
     input.addEventListener("keydown", (e) => {
         if (e.key === "Enter") btn.click();
     });
-
-    showDefaultFleetwoodMac();
 });
 
 
-
 // --- GLOBAL ARRAYS ---
-// Combining everything into objects so we can easily sort and filter by year
+
 const defaultAlbums = [
     { title: "Then Play On", year: 1969, label: "Deep Cut", img: "./Assets/Red.jpg" },
     { title: "Future Games", year: 1971, label: "Soft Rock Classic", img: "./Assets/Last.jpg" },
@@ -39,44 +43,8 @@ const defaultAlbums = [
     { title: "The Dance", year: 1997, label: "Live Performance", img: "./Assets/The-Dance.jpg" }
 ];
 
-// Keep these around so your search function doesn't break
-const customImages = defaultAlbums.map(album => album.img);
-const defaultLabels = defaultAlbums.map(album => album.label);
 
-
-document.addEventListener("DOMContentLoaded", () => {
-    const input = document.querySelector("input");
-    const btn = document.querySelector(".search__btn");
-    
-    const yearSlider = document.getElementById("yearSlider");
-    const yearValue = document.getElementById("yearValue");
-
-    // 1. Initial Page Load
-    const initialYear = parseInt(yearSlider.value);
-    yearValue.textContent = initialYear;
-    filterAndRenderAlbums(initialYear);
-
-    // 2. Listen for Slider Movement
-    yearSlider.addEventListener("input", (e) => {
-        const selectedYear = parseInt(e.target.value);
-        yearValue.textContent = selectedYear;
-        
-        // Filter albums that were released on or before the selected year
-        filterAndRenderAlbums(selectedYear);
-    });
-
-    btn.addEventListener("click", () => {
-        const query = input.value.trim();
-        if(query !== "") searchSongs(query);
-    });
-
-    input.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") btn.click();
-    });
-});
-
-
-// FILTER AND RENDER FUNCTION
+// FILTER AND RENDER FUNCTION (For the Default Fleetwood Mac albums)
 function filterAndRenderAlbums(maxYear) {
     const results = document.getElementById("results");
     results.innerHTML = "";
@@ -111,40 +79,14 @@ function filterAndRenderAlbums(maxYear) {
     });
 }
 
-// Keep this strictly for the search function's fallback
+
+// Fallback function 
 function showDefaultFleetwoodMac() {
     filterAndRenderAlbums(2000); 
 }
 
 
-// SHOW DEFAULT CARDS
-function showDefaultFleetwoodMac() {
-    const results = document.getElementById("results");
-    results.innerHTML = "";
-
-    customImages.forEach((img, index) => {
-        results.innerHTML += `
-            <div class="song flip-card">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <img src="${img}" alt="Song Image">
-                        <h3>${defaultTitles[index]}</h3>
-                    </div>
-                    <div class="flip-card-back">
-                        <i class="fa-solid fa-qrcode"></i>
-                        <p style="font-weight: bold; margin-bottom: -10px;">Scan for soundtrack</p>
-                        <p>${defaultLabels[index]}</p>
-                    </div>
-                </div>
-
-                
-            </div>
-        `;
-    });
-}
-
-
-// SEARCH FUNCTION
+// SEARCH FUNCTION (Queries MusicBrainz API)
 async function searchSongs(query) {
     const loading = document.getElementById("loading");
     const results = document.getElementById("results");
@@ -173,33 +115,29 @@ async function searchSongs(query) {
 }
 
 
-// DISPLAY RESULTS (ONLY FLEETWOOD MAC)
+// DISPLAY RESULTS (ALL ARTISTS)
 function displaySongs(songs) {
     const results = document.getElementById("results");
     results.innerHTML = "";
 
     // If API returned nothing or wrong structure
-    if (!songs || !Array.isArray(songs)) {
+    if (!songs || !Array.isArray(songs) || songs.length === 0) {
         results.innerHTML = `<p class="no-results">No results found.</p>`;
         return;
     }
 
-    // Filter ONLY Fleetwood Mac
-    const filtered = songs.filter(song => {
-        const artist = song["artist-credit"]?.[0]?.name?.toLowerCase() || "";
-        return artist === "fleetwood mac";
-    });
+    // Show up to 6 results from ANY artist
+    songs.slice(0, 6).forEach((song) => {
+        const title = song.title || "Unknown Title";
+        
+        // Grab the actual artist name from the API!
+        const artist = song["artist-credit"]?.[0]?.name || "Unknown Artist";
+        
+        // Use a generic placeholder image for search results
+        const img = "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60"; 
 
-    // If nothing matches → show message
-    if (filtered.length === 0) {
-        results.innerHTML = `<p class="no-results">No results found.</p>`;
-        return;
-    }
-
-    // Show up to 6 Fleetwood Mac results
-    filtered.slice(0, 6).forEach((song, index) => {
-        const title = song.title;
-        const img = customImages[index];
+        // Try to get the release year from the MusicBrainz API
+        const year = song["first-release-date"] ? song["first-release-date"].substring(0, 4) : "Unknown Year";
 
         results.innerHTML += `
             <div class="song flip-card">
@@ -207,15 +145,15 @@ function displaySongs(songs) {
                     <div class="flip-card-front">
                         <img src="${img}" alt="Song Image">
                         <h3>${title}</h3>
+                        <p style="color: #7a3cff; font-size: 14px; margin-top: 4px; font-weight: bold;">By: ${artist}</p>
                     </div>
                     <div class="flip-card-back">
                         <i class="fa-solid fa-qrcode"></i>
                         <p style="font-weight: bold; margin-bottom: -10px;">Scan for soundtrack</p>
-                        <p>${defaultLabels[index]}</p>
+                        <p>Released: ${year}</p>
                     </div>
                 </div>
             </div>
         `;
-        
     });
 }
